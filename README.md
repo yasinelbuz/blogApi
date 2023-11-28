@@ -1,0 +1,1 @@
+dosyaları indirdikten sonra npm install sonra npm start
