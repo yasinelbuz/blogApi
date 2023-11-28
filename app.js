@@ -5,37 +5,39 @@ const app = express();
 app.use(express.json());
 app.use(morgan());
 const router = express.Router();
-app.use("/api/v1/categories", router)
+app.use('/api/v1/categories', router);
 
+router
+    .route('/')
+    .get((req, res) => {
+        res.json({
+            status: 'success1',
+        });
+    })
 
-router.route("/")
-.get((req, res) => {
-    res.json({
-        status:"success1",
-    })
-  })
-.post((req, res) => {
-    res.json({
-        status:"success2",
-    })
-})
+    .post((req, res) => {
+        res.json({
+            status: 'success2',
+        });
+    });
 
-router.route("/:id")
-.get((req, res) => {
-    res.json({
-        status:"success3",
+router
+    .route('/:id')
+    .get((req, res) => {
+        res.json({
+            status: 'success3',
+        });
     })
-  })
-.patch((req, res) => {
-    res.json({
-        status:"success4",
+    .patch((req, res) => {
+        res.json({
+            status: 'success4',
+        });
     })
-})
-.delete((req, res) => {
-    res.json({
-        status:"success5",
-    })
-})
+    .delete((req, res) => {
+        res.json({
+            status: 'success5',
+        });
+    });
 
 
 
