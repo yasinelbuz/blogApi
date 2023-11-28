@@ -1,7 +1,7 @@
 {
-  "name": "shoppingapi",
+  "name": "blogapi",
   "version": "1.0.0",
-  "description": "shopping api",
+  "description": "blog api example",
   "main": "index.js",
   "scripts": {
     "start": "nodemon app"
