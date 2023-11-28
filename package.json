@@ -1,0 +1,14 @@
+{
+  "name": "shoppingapi",
+  "version": "1.0.0",
+  "description": "shopping api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "example_user <example-user@example.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
