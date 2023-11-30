@@ -2,9 +2,9 @@
   "name": "blogapi",
   "version": "1.0.0",
   "description": "blog api example",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon ./src/server"
   },
   "author": "example_user <example-user@example.com>",
   "license": "MIT",
