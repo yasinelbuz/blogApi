@@ -42,7 +42,7 @@ exports.getCategory = (req, res) => {
     const sql = `SELECT id, name, description, created_at, update_at FROM categories WHERE id=${req.params.id}`;
     connection.query(sql, (err, result) => {
         if (err && !req.params.id) {
-            res.status(404).send('There is no category')
+            res.status(404).send('There is no category');
         } else {
             res.status(200).json({
                 status: 'success get',
@@ -58,12 +58,32 @@ exports.getCategory = (req, res) => {
     });
 };
 exports.updateCategory = (req, res) => {
-    res.status(200).json({
-        status: 'success update',
+    const d = new Date();
+    const formattedDate = d.toISOString().split('T')[0];
+    const sql = `UPDATE categories SET name="${req.body.name}",description="${req.body.description}",update_at="${formattedDate}" WHERE id=${req.params.id}`;
+
+    connection.query(sql, (err, result) => {
+        if (err || !result.affectedRows > 0) {
+            res.status(404).send('update error');
+        } else {
+            res.status(200).json({
+                status: 'success updata',
+                data: {
+                    result,
+                },
+            });
+            console.log('Query results: ', result);
+        }
     });
 };
 exports.deleteCategory = (req, res) => {
-    res.status(204).json({
-        status: 'success delete',
+    const sql = `DELETE FROM categories WHERE id=${req.params.id}`;
+    connection.query(sql, (err, result) => {
+        if (err || !result.affectedRows > 0) {
+            res.status(404).send('delete error');
+        } else {
+            res.status(204).send();
+            console.log('Query results:');
+        }
     });
 };
