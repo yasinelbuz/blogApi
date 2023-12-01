@@ -25,7 +25,7 @@ exports.createCategory = (req, res) => {
 
     connection.query(sql, (err, results) => {
         if (err || !req.body.name) {
-            res.status(404).send('create error')
+            res.status(404).send('create error');
         } else {
             res.status(201).json({
                 status: 'success create',
@@ -39,8 +39,22 @@ exports.createCategory = (req, res) => {
 };
 
 exports.getCategory = (req, res) => {
-    res.status(200).json({
-        status: 'success get',
+    const sql = `SELECT id, name, description, created_at, update_at FROM categories WHERE id=${req.params.id}`;
+    connection.query(sql, (err, result) => {
+        if (err && !req.params.id) {
+            res.status(404).send('There is no category')
+        } else {
+            res.status(200).json({
+                status: 'success get',
+                data: {
+                    result,
+                },
+            });
+            console.log('Query results: ', result);
+        }
+
+        // MySQL bağlantısını kapat
+        //connection.end();
     });
 };
 exports.updateCategory = (req, res) => {
