@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 exports.connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'blogApi',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_DATABASE,
 });
