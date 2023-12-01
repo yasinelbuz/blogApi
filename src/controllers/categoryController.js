@@ -21,8 +21,20 @@ exports.getAllCategories = (req, res) => {
 };
 
 exports.createCategory = (req, res) => {
-    res.status(201).json({
-        status: 'success create',
+    const sql = `INSERT INTO categories(name, description, created_at) VALUES ("${req.body.name}","${req.body.description}","${req.body.created_at}")`;
+
+    connection.query(sql, (err, results) => {
+        if (err || !req.body.name) {
+            res.status(404).send('create error')
+        } else {
+            res.status(201).json({
+                status: 'success create',
+                data: {
+                    results,
+                },
+            });
+            console.log('Query results: ', results);
+        }
     });
 };
 
