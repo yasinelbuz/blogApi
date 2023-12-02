@@ -20,7 +20,7 @@ exports.getAllPosts = (req, res) => {
     });
 };
 
-exports.createPosts = (req, res) => {
+exports.createPost = (req, res) => {
     const sql = `INSERT INTO posts(category_id, title, text, author, description, coverage_image) VALUES ("${req.body.category_id}","${req.body.title}","${req.body.text}","${req.body.author}","${req.body.description}","${req.body.coverage_image}")`;
 
     connection.query(sql, (err, results) => {
@@ -58,17 +58,18 @@ exports.getPost = (req, res) => {
     });
 };
 
+
 exports.updatePost = (req, res) => {
     const d = new Date();
     const formattedDate = d.toISOString().split('T')[0];
-    const sql = `UPDATE categories SET name="${req.body.name}",description="${req.body.description}",update_at="${formattedDate}" WHERE id=${req.params.id}`;
+    const sql = `UPDATE posts SET category_id="${req.body.category_id}", title="${req.body.title}",  text="${req.body.text}", author="${req.body.author}", updated_at="${formattedDate}", description="${req.body.description}", coverage_image="${req.body.coverage_image}" WHERE id=${req.params.id}`;
 
     connection.query(sql, (err, result) => {
         if (err || !result.affectedRows > 0) {
             res.status(404).send('update error');
         } else {
             res.status(200).json({
-                status: 'success updata',
+                status: 'success updated',
                 data: {
                     result,
                 },
@@ -79,7 +80,7 @@ exports.updatePost = (req, res) => {
 };
 
 exports.deletePost = (req, res) => {
-    const sql = `DELETE FROM categories WHERE id=${req.params.id}`;
+    const sql = `DELETE FROM posts WHERE id=${req.params.id}`;
     connection.query(sql, (err, result) => {
         if (err || !result.affectedRows > 0) {
             res.status(404).send('delete error');
